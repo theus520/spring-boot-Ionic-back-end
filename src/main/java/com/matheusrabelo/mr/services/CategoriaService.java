@@ -25,4 +25,10 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 
+	public Categoria update(Categoria obj) {
+		// uma verificao se o objeto existe, caso nao existe laça uma exercao
+		find(obj.getId());
+		return repo.save(obj);
+	}
+
 }
