@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.matheusrabelo.mr.Repositories.CategoriaRepository;
 import com.matheusrabelo.mr.domain.Categoria;
+import com.matheusrabelo.mr.dto.CategoriaDTO;
 
 @Service
 public class CategoriaService {
@@ -58,4 +59,7 @@ public class CategoriaService {
 
 	}
 
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
+	}
 }
