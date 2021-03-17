@@ -2,6 +2,7 @@ package com.matheusrabelo.mr.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +32,9 @@ public class Endereco  implements Serializable {
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@ManyToOne
-	@JoinColumn(name = "cidade_id" )
+	// em vigor se usa o cascadetype.merge ao inves de all ou persist 
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 
 	public Endereco() {
