@@ -2,23 +2,46 @@ package com.matheusrabelo.mr.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.matheusrabelo.mr.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@NotEmpty(message = "Preenchimento obritório")
+	@Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 a 120 caracteres")
 	private String nome;
+
+	@NotEmpty(message = "Preencimento obrigatório")
+	@Email(message = "Email inválido ")
 	private String email;
+
+	@NotEmpty(message = "Preenchimento obritório")
+	
 	private String cpfOucnpj;
+
 	private Integer tipo;
 
+	@NotEmpty(message = "Preenchimento obritório")
 	private String logradouro;
+	@NotEmpty(message = "Preenchimento obritório")
 	private String numero;
+
 	private String complemento;
 	private String bairro;
+	@NotEmpty(message = "Preenchimento obritório")
 	private String cep;
-
+	@NotEmpty(message = "Preenchimento obritório")
 	private String telefone1;
+
 	private String telefone2;
+
 	private String telefone3;
 
 	private Integer cidadeId;
