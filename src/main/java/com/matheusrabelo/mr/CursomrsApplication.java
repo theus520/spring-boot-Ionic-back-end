@@ -56,11 +56,9 @@ public class CursomrsApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 
 	@Autowired
-
 	private PagamentoRepository pagamentoRepository;
 
 	@Autowired
-
 	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {

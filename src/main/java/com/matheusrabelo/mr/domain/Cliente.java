@@ -34,7 +34,7 @@ public class Cliente implements Serializable {
 	private String cpfOucnpj;
 	private Integer tipo;
 
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.MERGE)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ElementCollection
