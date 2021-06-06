@@ -82,7 +82,7 @@ public class DBService {
 		Produto p8 = new Produto(null, "Cortador de grama", 1000.00);
 		Produto p9 = new Produto(null, "Abajour", 120.00);
 		Produto p10 = new Produto(null, "Perfume", 130.00);
-		Produto p11 = new Produto(null, "Pendente", 100.00);
+	
 
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2, p4));
@@ -90,7 +90,7 @@ public class DBService {
 		cat4.getProdutos().addAll(Arrays.asList(p1, p2, p3, p7));
 		cat5.getProdutos().addAll(Arrays.asList(p8));
 		cat6.getProdutos().addAll(Arrays.asList(p9, p10));
-		cat7.getProdutos().addAll(Arrays.asList(p11));
+	
 
 		p1.getCategorias().addAll(Arrays.asList(cat1, cat4));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2, cat4));
@@ -102,10 +102,10 @@ public class DBService {
 		p8.getCategorias().addAll(Arrays.asList(cat5));
 		p9.getCategorias().addAll(Arrays.asList(cat6));
 		p10.getCategorias().addAll(Arrays.asList(cat6));
-		p11.getCategorias().addAll(Arrays.asList(cat7));
+		
 
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
 
 		Estado est1 = new Estado(null, "Tocantins");
 		Estado est2 = new Estado(null, "Rio de Janeiro");
@@ -120,7 +120,7 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-		Cliente cli1 = new Cliente(null, "marcelo", "Marcelo@.com", "098373727272", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null, "matheus", "matheusrabelo520@gmail.com", "098373727272", TipoCliente.PESSOAFISICA);
 
 		cli1.getTelefones().addAll(Arrays.asList("061991450778", "90639925857743"));
 
