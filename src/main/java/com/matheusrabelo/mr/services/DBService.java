@@ -29,16 +29,15 @@ import com.matheusrabelo.mr.domain.PagamentoComCartao;
 import com.matheusrabelo.mr.domain.Pedido;
 import com.matheusrabelo.mr.domain.Produto;
 import com.matheusrabelo.mr.domain.enums.EstadoPagamento;
+import com.matheusrabelo.mr.domain.enums.Perfil;
 import com.matheusrabelo.mr.domain.enums.TipoCliente;
-
 
 @Service
 public class DBService {
 
-	
 	@Autowired
 	private BCryptPasswordEncoder pe;
-	
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
@@ -66,9 +65,8 @@ public class DBService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 
-	public void instantiateTestDatabase() throws ParseException  {
-		
-		
+	public void instantiateTestDatabase() throws ParseException {
+
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
 		Categoria cat3 = new Categoria(null, "Cama mesa e banho");
@@ -87,7 +85,6 @@ public class DBService {
 		Produto p8 = new Produto(null, "Cortador de grama", 1000.00);
 		Produto p9 = new Produto(null, "Abajour", 120.00);
 		Produto p10 = new Produto(null, "Perfume", 130.00);
-	
 
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2, p4));
@@ -95,7 +92,6 @@ public class DBService {
 		cat4.getProdutos().addAll(Arrays.asList(p1, p2, p3, p7));
 		cat5.getProdutos().addAll(Arrays.asList(p8));
 		cat6.getProdutos().addAll(Arrays.asList(p9, p10));
-	
 
 		p1.getCategorias().addAll(Arrays.asList(cat1, cat4));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2, cat4));
@@ -107,7 +103,6 @@ public class DBService {
 		p8.getCategorias().addAll(Arrays.asList(cat5));
 		p9.getCategorias().addAll(Arrays.asList(cat6));
 		p10.getCategorias().addAll(Arrays.asList(cat6));
-		
 
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
@@ -125,17 +120,24 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-		Cliente cli1 = new Cliente(null, "matheus", "matheusrabelo520@gmail.com", "098373727272", TipoCliente.PESSOAFISICA,pe.encode("123"));
-
+		Cliente cli1 = new Cliente(null, "matheus", "matheusrabelo520@gmail.com", "05445378153",
+				TipoCliente.PESSOAFISICA, pe.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("061991450778", "90639925857743"));
+
+		Cliente cli2 = new Cliente(null, "marcelo", "rabelosousamatheus@gmail.com", "60305522019",
+				TipoCliente.PESSOAFISICA, pe.encode("123"));
+		cli2.getTelefones().addAll(Arrays.asList("061991450558", "9063992585343"));
+		cli2.addPerfil(Perfil.ADMIN);
 
 		Endereco e1 = new Endereco(null, "rua flores", "300", "apto 303", "jardim", "38220834", cli1, c1);
 		Endereco e2 = new Endereco(null, "Avenida matos", "105", "sala 840", "centro", "3848438", cli1, c2);
+		Endereco e3 = new Endereco(null, "Avenida Floripa", "205", "null", "centro", "281777012", cli2, c2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		clienteRepository.saveAll(Arrays.asList(cli1,cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2,e3));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -166,7 +168,7 @@ public class DBService {
 		p3.getItens().addAll(Arrays.asList(ip2));
 
 		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
-		
+
 	}
 
 }
