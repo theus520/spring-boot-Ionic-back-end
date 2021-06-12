@@ -1,5 +1,6 @@
 package com.matheusrabelo.mr.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.matheusrabelo.mr.Repositories.ClienteRepository;
 import com.matheusrabelo.mr.Repositories.EnderecoRepository;
@@ -104,5 +106,15 @@ public class ClienteService {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
 
+	}
+
+	public Cliente findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public URI uploadProfilePicture(MultipartFile file) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
