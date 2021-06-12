@@ -19,9 +19,11 @@ import com.matheusrabelo.mr.Repositories.EnderecoRepository;
 import com.matheusrabelo.mr.domain.Cidade;
 import com.matheusrabelo.mr.domain.Cliente;
 import com.matheusrabelo.mr.domain.Endereco;
+import com.matheusrabelo.mr.domain.enums.Perfil;
 import com.matheusrabelo.mr.domain.enums.TipoCliente;
 import com.matheusrabelo.mr.dto.ClienteDTO;
 import com.matheusrabelo.mr.dto.ClienteNewDTO;
+import com.matheusrabelo.mr.security.UserSS;
 
 @Service
 
@@ -37,6 +39,11 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 
 	public Cliente find(Integer id) {
+	
+		UserSS user = UserService.authenticated();
+		if(user == null || user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
