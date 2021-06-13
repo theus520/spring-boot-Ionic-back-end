@@ -1,19 +1,23 @@
 package com.matheusrabelo.mr.services;
-
 import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.matheusrabelo.mr.Repositories.ItemPedidoRepository;
 import com.matheusrabelo.mr.Repositories.PagamentoRepository;
 import com.matheusrabelo.mr.Repositories.PedidoRepository;
+import com.matheusrabelo.mr.domain.Cliente;
 import com.matheusrabelo.mr.domain.ItemPedido;
 import com.matheusrabelo.mr.domain.PagamentoComBoleto;
 import com.matheusrabelo.mr.domain.Pedido;
 import com.matheusrabelo.mr.domain.enums.EstadoPagamento;
+import com.matheusrabelo.mr.security.UserSS;
 
 @Service
 
@@ -69,4 +73,15 @@ public class PedidoService {
 		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	}
+
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Cliente cliente =  clienteService.find(user.getId());
+		return repo.findByCliente(cliente, pageRequest);
+	}
 }
+
