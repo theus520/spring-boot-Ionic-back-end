@@ -11,9 +11,8 @@ public  class CursomrsApplication  {
 	public static void main(String[] args) {
    SpringApplication.run(CursomrsApplication.class, args);
 				
-		
 	}
 
-
-
+	public void run(String... args) throws Exception {	
+	}	
 }
