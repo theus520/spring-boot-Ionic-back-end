@@ -13,6 +13,5 @@ public  class CursomrsApplication  {
 				
 	}
 
-	public void run(String... args) throws Exception {	
-	}	
+	
 }

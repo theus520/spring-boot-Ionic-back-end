@@ -37,6 +37,9 @@ public class ClienteService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private S3Service s3Service;
 
 	public Cliente find(Integer id) {
 	
@@ -114,13 +117,13 @@ public class ClienteService {
 		newObj.setEmail(obj.getEmail());
 
 	}
-
-	public Cliente findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public URI uploadProfilePicture(MultipartFile  multipartFile) {
+		
+		return s3Service.uploadFile(multipartFile);
 	}
 
-	public URI uploadProfilePicture(MultipartFile file) {
+	public Cliente findByEmail(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
