@@ -131,8 +131,6 @@ public class ClienteService {
 		newObj.setEmail(obj.getEmail());
 
 
-	
-	
 	}
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
 		UserSS user = UserService.authenticated();
