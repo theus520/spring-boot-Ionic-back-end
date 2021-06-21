@@ -24,7 +24,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	private JWTUtil jwtUtil;
 
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
-	
+
 		this.authenticationManager = authenticationManager;
 		this.jwtUtil = jwtUtil;
 	}
@@ -43,7 +43,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			return auth;
 
 		} catch (IOException e) {
-         throw new RuntimeException(e);
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -51,13 +51,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
 
-
-		
 		String username = ((UserSS) auth.getPrincipal()).getUsername();
-        String token = jwtUtil.generateToken(username);
-        res.addHeader("Authorization", "Bearer " + token);
+		String token = jwtUtil.generateToken(username);
+		res.addHeader("Authorization", "Bearer " + token);
+		res.addHeader("access-control-expose-headers", "Authorization");
+
 	}
-		
-		
-	
+
 }
